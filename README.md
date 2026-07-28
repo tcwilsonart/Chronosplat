@@ -6,7 +6,7 @@ splat sequences that move — with full free-camera navigation and a timeline.
 Static files only. No server, no plugin, no account. Publish it to GitHub Pages
 and share a link.
 
-**[Documentation →](../../wiki)**
+**[Documentation →](../../wiki/Chronosplat)**
 
 ---
 
@@ -92,6 +92,24 @@ wiki/          documentation source
 [Spark](https://sparkjs.dev) · [Three.js](https://threejs.org) ·
 [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform/) ·
 [Vite](https://vite.dev)
+
+## About the Example Data
+
+All the PLY files were exported from a Houdini 22 custom exporter written in Python.
+
+### bogdanFly
+
+Original splat by Dany Bittel · [Cluster Fly](https://superspl.at/scene/285082b2)
+
+Animation by Bogdan Lazar · [Animate Gaussian Splats with Houdini - Free Tutorial + Scene Files](https://www.youtube.com/watch?v=MqtMQl8DtjQ)
+
+### capyFall
+
+Test animation I made using the H22 included splat. Walk animation to ragdoll to vellum sim inflate.
+
+### excavator
+
+This is a scan I did for testing then animated the points in H22 · [Excavator Drone Scan](https://superspl.at/scene/1882034e)
 
 ## License
 
