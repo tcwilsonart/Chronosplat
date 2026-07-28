@@ -185,6 +185,7 @@ html, body {
   display: flex;
   gap: 10px;
   font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -267,12 +268,17 @@ html, body {
 .tl-volume { width: 80px; accent-color: var(--accent); cursor: pointer; }
 .tl-audio[hidden] { display: none; }
 
-/* Per-frame loading state during a cold scrub . */
+/* Per-frame loading state during a cold scrub.
+   The ellipsis is ALWAYS in the layout and only changes colour. Adding it on
+   demand changed the readout's width, and since .timeline wraps, that could
+   flip a wrap boundary and shunt the button row up or down a line — several
+   times a second during playback, because this class toggles on every decode. */
 .timeline.is-loading-frame .tl-slider { opacity: 0.55; }
-.timeline.is-loading-frame .tl-frame::after {
+.tl-frame::after {
   content: " …";
-  color: var(--accent);
+  color: transparent;
 }
+.timeline.is-loading-frame .tl-frame::after { color: var(--accent); }
 
 /* The stall indicator: `everyFrame` mode waiting on a decode. Distinct from a
    cold scrub so the two states are not confused when diagnosing playback. */
@@ -280,8 +286,13 @@ html, body {
   box-shadow: 0 0 0 1px var(--accent) inset;
 }
 
+/* Narrow screens: drop the fps field, which is a refinement rather than a way
+   in. The sequence picker and the mode selector both stay — with more than one
+   sequence, a hidden picker means the other sequences are undiscoverable. */
 @media (max-width: 620px) {
-.tl-field, .tl-toggle span { display: none; }
-.tl-field { display: none; }
-.tl-mode { display: flex; }
+  .tl-field, .tl-toggle span { display: none; }
+  .tl-seq, .tl-mode { display: flex; }
+  /* Long project names must not push the row wider than the viewport. */
+  .tl-seq select { max-width: 42vw; }
+  .tl-seq { order: -1; }
 }
