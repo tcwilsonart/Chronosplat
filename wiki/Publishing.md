@@ -1,5 +1,3 @@
-# Publishing
-
 The player is a static site. Anything that serves files over HTTP can host it.
 
 ## GitHub Pages
@@ -162,8 +160,28 @@ large and every viewer downloads them.
 2. Upload the frames. `rclone` handles the whole folder:
 
 ```
-rclone copy ./data/capyFall r2:<bucket>/capyFall --progress
+rclone copy ./data/capyFall r2:<bucket>/capyFall --header-upload "Cache-Control: public, max-age=31536000, immutable" --progress
 ```
+
+The `Cache-Control` header is not optional in practice. R2 sends none by
+default, so browsers fall back to heuristic freshness — a fraction of the
+file's age — and re-request frames every few minutes. Since the player evicts
+frames from memory as it plays, a looping sequence then re-downloads most of
+itself on every lap.
+
+Frame files are safe to mark `immutable`: their contents only change when you
+deliberately re-convert and re-upload. `immutable` stops revalidation
+altogether rather than merely extending freshness.
+
+To fix headers on frames **already uploaded**, add `--ignore-times`. By default
+rclone skips files whose size and timestamp match, so without it the command
+completes instantly having changed nothing:
+
+```
+rclone copy ./data/capyFall r2:<bucket>/capyFall --header-upload "Cache-Control: public, max-age=31536000, immutable" --ignore-times --progress
+```
+
+Uploading to R2 is free, so re-sending is only a matter of time spent.
 
 3. Add a CORS policy. Frames are fetched cross-origin, so without one the
    browser blocks every request. The policy is in

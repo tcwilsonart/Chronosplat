@@ -1,5 +1,3 @@
-# Player Usage
-
 ## Running it locally
 
 ```
@@ -102,10 +100,22 @@ generally the better choice.
 
 From within the player, raise the preload window with `?ahead=60`. On a machine
 with plenty of VRAM this can hold a short sequence entirely in memory. Watch the
-`resident` figure in the stats overlay to see how much is actually held.
+`resident` figure in the stats overlay to see how much is actually held — if it
+plateaus below what you asked for, the limit is memory, not the network.
 
 Beyond that, the fix is a lighter sequence — fewer frames or fewer splats per
 frame. See [Reducing size](Converting-PLY-to-SOG#reducing-size).
+
+### Frames re-downloading on every loop
+
+The player holds a bounded window of frames and disposes the rest, so a
+sequence longer than that window re-requests frames each time round. That is
+expected; the browser's HTTP cache is what should make it cheap.
+
+If the network panel shows full transfers rather than `cached`, the frames are
+being served without a useful `Cache-Control` header. See
+[Publishing](Publishing#cloudflare-r2) for the upload header that fixes it.
+Raising `?ahead=` avoids the problem entirely by keeping frames resident.
 
 ## Stats overlay
 

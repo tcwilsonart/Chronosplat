@@ -1,5 +1,3 @@
-# Converting PLY to SOG
-
 The converter takes a sequence of 3DGS `.ply` frames and produces per-frame
 `.sog` files plus a manifest the player can read.
 

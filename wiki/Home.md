@@ -1,5 +1,3 @@
-# Chronosplat
-
 A browser-based player for 4D Gaussian Splatting animations — splat sequences
 that move — plus the converter that prepares them.
 
