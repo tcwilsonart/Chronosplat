@@ -1,0 +1,19 @@
+[
+  {
+    "AllowedOrigins": [
+      "https://tcwilsonart.github.io",
+      "http://localhost:5173",
+      "http://127.0.0.1:5173"
+    ],
+    "AllowedMethods": ["GET", "HEAD"],
+    "AllowedHeaders": ["Range", "If-Match", "If-None-Match"],
+    "ExposeHeaders": [
+      "Content-Length",
+      "Content-Range",
+      "Content-Type",
+      "Accept-Ranges",
+      "ETag"
+    ],
+    "MaxAgeSeconds": 3600
+  }
+]

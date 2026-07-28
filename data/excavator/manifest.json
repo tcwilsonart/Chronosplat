@@ -1,0 +1,270 @@
+{
+  "version": 3,
+  "project": "excavator",
+  "source": {
+    "exporter": "unknown",
+    "shPresent": true,
+    "sourceShDegree": 1,
+    "sourceFrameCount": 59,
+    "sourceFps": 24
+  },
+  "encode": {
+    "format": "sog",
+    "shDegree": 1,
+    "quality": "medium",
+    "normalized": false
+  },
+  "display": {
+    "flipX": true,
+    "background": "#343434"
+  },
+  "temporal": {
+    "frameStep": 2,
+    "playbackFps": 12,
+    "durationSeconds": 2.5
+  },
+  "frameCount": 30,
+  "baseUrl": "https://pub-e7fc33402f6f49758da911c07f2dbae4.r2.dev/excavator/",
+  "frames": [
+    {
+      "index": 1,
+      "sourceIndex": 1,
+      "file": "frame_0001.sog",
+      "splats": 471456,
+      "bytes": 7517252
+    },
+    {
+      "index": 2,
+      "sourceIndex": 3,
+      "file": "frame_0002.sog",
+      "splats": 471456,
+      "bytes": 7517447
+    },
+    {
+      "index": 3,
+      "sourceIndex": 5,
+      "file": "frame_0003.sog",
+      "splats": 471456,
+      "bytes": 7516291
+    },
+    {
+      "index": 4,
+      "sourceIndex": 7,
+      "file": "frame_0004.sog",
+      "splats": 471456,
+      "bytes": 7517465
+    },
+    {
+      "index": 5,
+      "sourceIndex": 9,
+      "file": "frame_0005.sog",
+      "splats": 471456,
+      "bytes": 7517079
+    },
+    {
+      "index": 6,
+      "sourceIndex": 11,
+      "file": "frame_0006.sog",
+      "splats": 471456,
+      "bytes": 7517727
+    },
+    {
+      "index": 7,
+      "sourceIndex": 13,
+      "file": "frame_0007.sog",
+      "splats": 471456,
+      "bytes": 7516398
+    },
+    {
+      "index": 8,
+      "sourceIndex": 15,
+      "file": "frame_0008.sog",
+      "splats": 471456,
+      "bytes": 7512693
+    },
+    {
+      "index": 9,
+      "sourceIndex": 17,
+      "file": "frame_0009.sog",
+      "splats": 471456,
+      "bytes": 7501816
+    },
+    {
+      "index": 10,
+      "sourceIndex": 19,
+      "file": "frame_0010.sog",
+      "splats": 471456,
+      "bytes": 7471916
+    },
+    {
+      "index": 11,
+      "sourceIndex": 21,
+      "file": "frame_0011.sog",
+      "splats": 471456,
+      "bytes": 7459267
+    },
+    {
+      "index": 12,
+      "sourceIndex": 23,
+      "file": "frame_0012.sog",
+      "splats": 471456,
+      "bytes": 7480232
+    },
+    {
+      "index": 13,
+      "sourceIndex": 25,
+      "file": "frame_0013.sog",
+      "splats": 471456,
+      "bytes": 7516370
+    },
+    {
+      "index": 14,
+      "sourceIndex": 27,
+      "file": "frame_0014.sog",
+      "splats": 471456,
+      "bytes": 7535766
+    },
+    {
+      "index": 15,
+      "sourceIndex": 29,
+      "file": "frame_0015.sog",
+      "splats": 471456,
+      "bytes": 7526901
+    },
+    {
+      "index": 16,
+      "sourceIndex": 31,
+      "file": "frame_0016.sog",
+      "splats": 471456,
+      "bytes": 7520869
+    },
+    {
+      "index": 17,
+      "sourceIndex": 33,
+      "file": "frame_0017.sog",
+      "splats": 471456,
+      "bytes": 7532708
+    },
+    {
+      "index": 18,
+      "sourceIndex": 35,
+      "file": "frame_0018.sog",
+      "splats": 471456,
+      "bytes": 7539469
+    },
+    {
+      "index": 19,
+      "sourceIndex": 37,
+      "file": "frame_0019.sog",
+      "splats": 471456,
+      "bytes": 7538530
+    },
+    {
+      "index": 20,
+      "sourceIndex": 39,
+      "file": "frame_0020.sog",
+      "splats": 471456,
+      "bytes": 7516686
+    },
+    {
+      "index": 21,
+      "sourceIndex": 41,
+      "file": "frame_0021.sog",
+      "splats": 471456,
+      "bytes": 7481928
+    },
+    {
+      "index": 22,
+      "sourceIndex": 43,
+      "file": "frame_0022.sog",
+      "splats": 471456,
+      "bytes": 7506378
+    },
+    {
+      "index": 23,
+      "sourceIndex": 45,
+      "file": "frame_0023.sog",
+      "splats": 471456,
+      "bytes": 7516253
+    },
+    {
+      "index": 24,
+      "sourceIndex": 47,
+      "file": "frame_0024.sog",
+      "splats": 471456,
+      "bytes": 7516708
+    },
+    {
+      "index": 25,
+      "sourceIndex": 49,
+      "file": "frame_0025.sog",
+      "splats": 471456,
+      "bytes": 7516037
+    },
+    {
+      "index": 26,
+      "sourceIndex": 51,
+      "file": "frame_0026.sog",
+      "splats": 471456,
+      "bytes": 7517177
+    },
+    {
+      "index": 27,
+      "sourceIndex": 53,
+      "file": "frame_0027.sog",
+      "splats": 471456,
+      "bytes": 7518443
+    },
+    {
+      "index": 28,
+      "sourceIndex": 55,
+      "file": "frame_0028.sog",
+      "splats": 471456,
+      "bytes": 7516489
+    },
+    {
+      "index": 29,
+      "sourceIndex": 57,
+      "file": "frame_0029.sog",
+      "splats": 471456,
+      "bytes": 7517636
+    },
+    {
+      "index": 30,
+      "sourceIndex": 59,
+      "file": "frame_0030.sog",
+      "splats": 471456,
+      "bytes": 7516963
+    }
+  ],
+  "bounds": {
+    "min": [
+      -1.123917,
+      -0.380546,
+      -1.195465
+    ],
+    "max": [
+      1.272591,
+      0.402811,
+      1.196648
+    ]
+  },
+  "camera": {
+    "position": [
+      -0.5309,
+      0.9347,
+      1.3748
+    ],
+    "target": [
+      0.0742,
+      0.0704,
+      -0.0005
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "fov": 41
+  }
+}

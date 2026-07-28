@@ -1,0 +1,20 @@
+# Normalise line endings so a checkout is identical on every platform.
+# Without this, core.autocrlf=true (the Windows default) rewrites text files to
+# CRLF on checkout, which breaks the `#!/usr/bin/env bash` shebang in tools/*.sh.
+* text=auto eol=lf
+
+# Batch files are the exception: cmd.exe wants CRLF.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Sequence data and assets are binary. Git usually detects this correctly, but
+# a text conversion applied to a .sog would silently corrupt every frame in it,
+# so state it rather than rely on heuristics.
+*.sog binary
+*.ply binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp3 binary
+*.wav binary

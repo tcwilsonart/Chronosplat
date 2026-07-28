@@ -1,0 +1,26 @@
+{
+  "name": "chronosplat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chronosplat — self-hosted 4D Gaussian Splatting sequence player and converter (Spark + per-frame SOG)",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node tests/smoke.mjs"
+  },
+  "dependencies": {
+    "@sparkjsdev/spark": "^2.1.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@playcanvas/splat-transform": "^3.1.7",
+    "playwright-core": "^1.62.0",
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

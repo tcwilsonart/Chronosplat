@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sequences": [
+    {
+      "id": "bogdanFly",
+      "name": "bogdanFly",
+      "manifest": "bogdanFly/manifest.json",
+      "baseUrl": "",
+      "frameCount": 31,
+      "splats": 624180,
+      "bytes": 246462076,
+      "playbackFps": 12,
+      "durationSeconds": 2.5833,
+      "shDegree": 0,
+      "shPresent": false
+    },
+    {
+      "id": "capyFall",
+      "name": "capyFall",
+      "manifest": "capyFall/manifest.json",
+      "baseUrl": "https://pub-e7fc33402f6f49758da911c07f2dbae4.r2.dev/capyFall/",
+      "frameCount": 60,
+      "splats": 350940,
+      "bytes": 346338151,
+      "playbackFps": 8,
+      "durationSeconds": 7.5,
+      "shDegree": 1,
+      "shPresent": true
+    },
+    {
+      "id": "excavator",
+      "name": "excavator",
+      "manifest": "excavator/manifest.json",
+      "baseUrl": "https://pub-e7fc33402f6f49758da911c07f2dbae4.r2.dev/excavator/",
+      "frameCount": 30,
+      "splats": 471456,
+      "bytes": 225396894,
+      "playbackFps": 12,
+      "durationSeconds": 2.5,
+      "shDegree": 1,
+      "shPresent": true
+    }
+  ]
+}

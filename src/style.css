@@ -1,0 +1,287 @@
+/* Player chrome. Plain CSS overlay — no UI framework. */
+
+:root {
+  --bg: #0b0d10;
+  --panel: rgba(18, 21, 26, 0.88);
+  --border: rgba(255, 255, 255, 0.12);
+  --fg: #e8ecf1;
+  --muted: #9aa5b1;
+  --accent: #4da3ff;
+  --danger: #ff6b6b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+/* The overlays below are toggled with the `hidden` attribute, but each is
+ * styled through an ID selector whose `display` would otherwise out-specify
+ * the user-agent `[hidden] { display: none }` rule and leave them on screen.
+ * Restate it at matching specificity so `hidden` actually hides. */
+#status[hidden],
+#error[hidden],
+#stats[hidden] { display: none; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+#viewport, #viewport canvas {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* ---------- status / spinner ---------- */
+
+#status {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+.spinner { animation-duration: 2.4s; }
+}
+
+/* ---------- fatal error ---------- */
+
+#error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(560px, 90vw);
+  padding: 20px 24px;
+  background: var(--panel);
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  z-index: 30;
+}
+
+#error h2 { margin: 0 0 8px; font-size: 15px; color: var(--danger); }
+#error p { margin: 0; color: var(--muted); }
+
+/* ---------- stats ---------- */
+
+#stats {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: 11px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--muted);
+  white-space: pre-wrap;
+  z-index: 15;
+}
+
+/* ---------- timeline ---------- */
+
+#hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 12px clamp(10px, 3vw, 28px) calc(12px + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  flex-wrap: wrap;
+}
+
+.tl-btn {
+  flex: none;
+  height: 30px;
+  min-width: 30px;
+  padding: 0 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tl-btn:hover { background: rgba(255, 255, 255, 0.13); }
+.tl-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tl-btn.is-active { background: var(--accent); border-color: var(--accent); color: #06121f; }
+
+/* Play/pause glyph drawn in CSS so there is no icon dependency. */
+.tl-play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 9px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  margin-left: 2px;
+}
+
+.tl-play.is-playing::before {
+  width: 9px;
+  height: 11px;
+  border: none;
+  margin-left: 0;
+  background: linear-gradient(
+    to right,
+    currentColor 0 3px, transparent 3px 6px, currentColor 6px 9px
+  );
+}
+
+.tl-slider {
+  flex: 1 1 220px;
+  min-width: 140px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.tl-readout {
+  flex: none;
+  display: flex;
+  gap: 10px;
+  font: 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+}
+
+.tl-frame { color: var(--fg); }
+.tl-time { color: var(--muted); }
+
+.tl-toggle, .tl-field {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tl-toggle input { accent-color: var(--accent); cursor: pointer; }
+
+.tl-field input,
+.tl-field select {
+  height: 26px;
+  padding: 0 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg);
+  font: inherit;
+}
+
+.tl-field input { width: 62px; }
+.tl-field select { cursor: pointer; }
+
+/* Sequence picker sits first and gets room for real names. */
+.tl-seq select {
+  max-width: 220px;
+  font-weight: 500;
+}
+
+/* Presentation controls cluster together, away from the transport. */
+.tl-group {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+}
+
+.tl-swatch {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.tl-swatch input[type="color"] {
+  width: 150%;
+  height: 150%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Save Scene sits hard right, away from the preview-only controls, so the one
+   button that writes to disk is never hit by accident. */
+.tl-save {
+  margin-left: auto;
+  border-color: rgba(77, 163, 255, 0.5);
+}
+
+.tl-save:hover { background: rgba(77, 163, 255, 0.2); }
+
+.tl-audio { flex: none; display: flex; align-items: center; gap: 8px; }
+.tl-volume { width: 80px; accent-color: var(--accent); cursor: pointer; }
+.tl-audio[hidden] { display: none; }
+
+/* Per-frame loading state during a cold scrub . */
+.timeline.is-loading-frame .tl-slider { opacity: 0.55; }
+.timeline.is-loading-frame .tl-frame::after {
+  content: " …";
+  color: var(--accent);
+}
+
+/* The stall indicator: `everyFrame` mode waiting on a decode. Distinct from a
+   cold scrub so the two states are not confused when diagnosing playback. */
+.timeline.is-loading-frame .tl-play {
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+
+@media (max-width: 620px) {
+.tl-field, .tl-toggle span { display: none; }
+.tl-field { display: none; }
+.tl-mode { display: flex; }
+}

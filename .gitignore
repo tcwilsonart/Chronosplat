@@ -1,0 +1,49 @@
+node_modules/
+dist/
+tests/output/
+
+# Source PLY sequences. Multi-GB and reproducible from the original exports —
+# only the converted .sog output in data/ is committed.
+raw_data/
+
+# Internal working notes, specs and archives. Published documentation lives in
+# wiki/ (synced to the GitHub Wiki) and in README.md.
+docs/
+
+# Python
+__pycache__/
+*.pyc
+
+# Converter scratch
+*.canonical.ply
+
+# OS
+Thumbs.db
+.DS_Store
+
+# NOTE: data/ is deliberately NOT ignored.
+# The player and the .sog frames are served from the SAME public repo so
+# everything is same-origin on GitHub Pages and no CORS config is needed.
+# The frames are committed via Git.
+#
+# Before committing a full sequence, check the converter's summary:
+#   - each .sog must stay under the 100 MB per-file push limit
+#   - the total must stay under the ~1 GB Pages published-site ceiling
+# Reduce with --frame-step or --sh-degree if not. Do NOT reach for Git LFS
+# first: GitHub Pages has historically not served LFS objects directly.
+#
+# Re-converting a sequence at a lower frame-step leaves orphaned frames from
+# the previous run. They are not in any manifest, so the converter's size
+# report does not count them — but Git would commit them permanently.
+# Check on-disk vs manifest frame counts before the first commit.
+
+# --- Which sequences ship in the repo -------------------------------------
+# Frames are excluded by default and allowed back in per sequence. Everything
+# else under data/ — manifest.json and index.json — stays tracked regardless,
+# so the library, its cameras and its backgrounds remain version-controlled
+# even for sequences whose frames live in object storage.
+#
+# To publish a sequence with the site, add a negation for it below and clear
+# its baseUrl:  py tools/set_host.py <name> --local
+data/*/frame_*.sog
+!data/bogdanFly/frame_*.sog

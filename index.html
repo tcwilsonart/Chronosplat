@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Chronosplat</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <!-- Renderer canvas is appended here. -->
+    <div id="viewport"></div>
+
+    <!-- Load / per-frame status (FR-1). -->
+    <div id="status" hidden>
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="status-text">Loading…</span>
+    </div>
+
+    <!-- Fatal errors: no WebGL2, missing manifest (FR-6). -->
+    <div id="error" role="alert" hidden></div>
+
+    <!-- Timeline overlay mounts here (FR-3). -->
+    <div id="hud"></div>
+
+    <!-- Resident-window / memory readout, shown with ?stats=1 (G1). -->
+    <pre id="stats" hidden></pre>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

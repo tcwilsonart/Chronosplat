@@ -1,0 +1,76 @@
+name: Deploy Chronosplat to GitHub Pages
+
+# Player + sequence data live in ONE public repo and are served same-origin
+# from Pages. The bundle is built with Vite; data/ is copied in verbatim
+# beside it so manifest.baseUrl can stay "" and no CORS config is needed
+# anywhere.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a running deploy; let it finish and queue the next.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Copy sequence data beside the bundle
+        run: |
+          # data/index.json is what the player loads first; it lists every
+          # sequence. A single-sequence deployment still has one.
+          if [ ! -f data/index.json ]; then
+            echo "::error::data/index.json not found. Run the converter and commit data/ before deploying."
+            exit 1
+          fi
+          mkdir -p dist/data
+          cp -r data/. dist/data/
+
+      - name: Check GitHub Pages size limits
+        run: |
+          BYTES=$(du -sb dist | cut -f1)
+          MB=$((BYTES / 1024 / 1024))
+          echo "Published site size: ${MB} MiB"
+          # 1 GB published-site ceiling.
+          if [ "$BYTES" -gt 1000000000 ]; then
+            echo "::error::dist is ${MB} MiB, over the ~1 GB GitHub Pages ceiling. Re-convert at smaller settings, or drop a sequence."
+            exit 1
+          fi
+          if [ "$BYTES" -gt 800000000 ]; then
+            echo "::warning::dist is ${MB} MiB — approaching the ~1 GB Pages ceiling."
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
